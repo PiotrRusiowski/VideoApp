@@ -9,7 +9,6 @@ import { youTubeKey, vimeoKey } from "./apiKeys";
 const App = () => {
   const dispatch = useDispatch();
   const reducerState = useSelector((state) => state);
-  const { test } = reducerState;
 
   const getVideoDetails = (e) => {
     e.preventDefault();
@@ -91,8 +90,6 @@ const App = () => {
             search
           </Button>
         </form>
-
-        <h1>{test}</h1>
       </Container>
     </div>
   );

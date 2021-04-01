@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { Button, Container, Input } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeTest, getVideo } from "./actions";
+import { getVideo } from "./actions";
 import axios from "axios";
 import { youTubeKey, vimeoKey } from "./apiKeys";
 
@@ -13,54 +13,73 @@ const App = () => {
 
   const getVideoDetails = (e) => {
     e.preventDefault();
+    const inputValue = e.target.searchVideo.value;
+    let video;
 
-    const videoId = e.target.searchVideo.value.slice(
-      e.target.searchVideo.value.length - 11
-    );
+    if (inputValue.includes("youtube")) {
+      const youTubeId = e.target.searchVideo.value.slice(
+        e.target.searchVideo.value.length - 11
+      );
+      axios
 
-    // const videoId2 = 7466309;
-    // // https://vimeo.com/7466309
-    // axios
-    //   .get(`https://api.vimeo.com/videos/${videoId2}`, {
-    //     headers: {
-    //       Authorization: "bearer " + vimeoKey,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+        .get(
+          `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${youTubeId}&key=${youTubeKey}`
+        )
+        .then((res) => {
+          const { title, publishedAt, thumbnails } = res.data.items[0].snippet;
+          const {
+            likeCount,
+            dislikeCount,
+            viewCount,
+          } = res.data.items[0].statistics;
 
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${videoId}&key=${youTubeKey}`
-      )
-      .then((res) => {
-        const { title, publishedAt, thumbnails } = res.data.items[0].snippet;
-        const {
-          likeCount,
-          dislikeCount,
-          viewCount,
-        } = res.data.items[0].statistics;
+          const id = res.data.items[0].id;
+          const thumbnail = thumbnails.default.url;
 
-        const id = res.data.items[0].id;
-        const thumbnail = thumbnails.default.url;
+          video = {
+            id,
+            title,
+            publishedAt,
+            thumbnail,
+            likeCount,
+            // dislikeCount,
+            viewCount,
+          };
+          dispatch(getVideo(video));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      let vimeoId;
+      if (e.target.searchVideo.value.includes("https")) {
+        vimeoId = e.target.searchVideo.value.substring(18);
+        console.log(true);
+      } else {
+        vimeoId = e.target.searchVideo.value;
+        console.log(false);
+      }
 
-        const video = {
-          id,
-          title,
-          publishedAt,
-          thumbnail,
-          likeCount,
-          dislikeCount,
-          viewCount,
-        };
-        console.log(video);
-        dispatch(getVideo(video));
-      })
-      .catch((err) => console.log(err));
+      console.log(vimeoId);
+      axios
+        .get(`https://api.vimeo.com/videos/${vimeoId}`, {
+          headers: {
+            Authorization: "bearer " + vimeoKey,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          const { name, metadata, pictures, created_time } = res.data;
+          const title = name;
+          const likeCount = metadata.connections.likes.total;
+          const thubnail = pictures.sizes[2].link;
+          const publishedAt = created_time;
+          const id = vimeoId;
 
-    console.log(videoId);
+          video = { title, likeCount, thubnail, publishedAt, id };
+          dispatch(getVideo(video));
+        })
+        .catch((err) => console.log(err));
+    }
+    console.log(video);
   };
 
   return (

@@ -11,6 +11,16 @@ const reducer = (state = initialState, actions) => {
         ...state,
         videosList: [...state.videosList, payload],
       };
+    case actionsTypes.deleteSingleVideo:
+      const videosListAfterDelete = state.videosList.filter(
+        (video) => video.id !== payload
+      );
+
+      console.log(videosListAfterDelete);
+      return {
+        ...state,
+        videosList: [...videosListAfterDelete],
+      };
     default:
       return state;
   }

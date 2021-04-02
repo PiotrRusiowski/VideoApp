@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVideo } from "./actions";
 import axios from "axios";
 import { youTubeKey, vimeoKey } from "./apiKeys";
+import VideosList from "./components/VideosList/VideosList";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,7 +79,6 @@ const App = () => {
         })
         .catch((err) => console.log(err));
     }
-    console.log(video);
   };
 
   return (
@@ -90,6 +90,7 @@ const App = () => {
             search
           </Button>
         </form>
+        <VideosList />
       </Container>
     </div>
   );

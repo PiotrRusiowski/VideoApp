@@ -26,6 +26,7 @@ const App = () => {
           `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${youTubeId}&key=${youTubeKey}`
         )
         .then((res) => {
+          console.log(res);
           const { title, publishedAt, thumbnails } = res.data.items[0].snippet;
           const {
             likeCount,
@@ -34,7 +35,7 @@ const App = () => {
           } = res.data.items[0].statistics;
 
           const id = res.data.items[0].id;
-          const thumbnail = thumbnails.default.url;
+          const thumbnail = thumbnails.standard.url;
 
           video = {
             id,
@@ -70,11 +71,11 @@ const App = () => {
           const { name, metadata, pictures, created_time } = res.data;
           const title = name;
           const likeCount = metadata.connections.likes.total;
-          const thubnail = pictures.sizes[2].link;
+          const thumbnail = pictures.sizes[3].link;
           const publishedAt = created_time;
           const id = vimeoId;
 
-          video = { title, likeCount, thubnail, publishedAt, id };
+          video = { title, likeCount, thumbnail, publishedAt, id };
           dispatch(getVideo(video));
         })
         .catch((err) => console.log(err));

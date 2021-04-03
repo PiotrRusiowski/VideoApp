@@ -7,3 +7,7 @@ export const getVideo = (video) => ({
   type: actionsTypes.GET_VIDEO,
   payload: video,
 });
+export const addToLikes = (id) => ({
+  type: actionsTypes.addToLikes,
+  payload: id,
+});

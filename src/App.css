@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-body{
-  font-size:15px;
-}
 
 button {
 cursor: pointer;  
@@ -17,9 +14,12 @@ ul{
   list-style: none
 }
 p{
+margin: 0px im !important;
+margin-bottom: 0px;
 
 }
 a{
-  text-decoration:none;
+  text-decoration: none;
+  color:black
 
 }

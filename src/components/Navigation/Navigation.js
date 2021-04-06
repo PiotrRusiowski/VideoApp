@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { BsFilterLeft } from "react-icons/bs";
 
 import {
@@ -16,11 +18,12 @@ import {
   NavbarText,
   Container,
 } from "reactstrap";
+import { deleteAllVideos } from "../../actions";
 import GetVideoForm from "../GetVideoForm/GetVideoForm";
 
 const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -39,9 +42,11 @@ const Navigation = (props) => {
               </h3>
               <DropdownMenu right>
                 <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
+                {/* <DropdownItem onClick={()=>{dispatch()}} >Show likes videos</DropdownItem> */}
                 <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
+                <DropdownItem onClick={dispatch(deleteAllVideos())}>
+                  Delete all videos
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

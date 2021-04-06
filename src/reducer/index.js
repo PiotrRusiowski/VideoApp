@@ -1,7 +1,21 @@
 import { actionsTypes } from "../actions/actionsTypes";
+// import { getVideosFromLocalStorage } from "../utils/localStorageGetter";
+
+const getVideosFromLocalStorage = () => {
+  let localStorageVideos;
+
+  if (localStorage.getItem("videosList")) {
+    localStorageVideos = JSON.parse(localStorage.getItem("videosList"));
+  } else {
+    localStorageVideos = [];
+  }
+
+  return localStorageVideos;
+};
 
 const initialState = {
-  videosList: [],
+  showVideos: [],
+  videosList: getVideosFromLocalStorage(),
   likesVideosList: [],
 };
 const reducer = (state = initialState, actions) => {
@@ -29,6 +43,12 @@ const reducer = (state = initialState, actions) => {
         ...state,
         likesVideosList: [...state.likesVideosList, likeVideo],
       };
+    case actionsTypes.deleteAllVideos:
+      return {
+        ...state,
+        videosList: [],
+      };
+
     default:
       return state;
   }

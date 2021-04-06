@@ -11,3 +11,12 @@ export const addToLikes = (id) => ({
   type: actionsTypes.addToLikes,
   payload: id,
 });
+export const deleteAllVideos = () => ({
+  type: actionsTypes.deleteAllVideos,
+});
+export const showAllVideos = () => ({
+  type: actionsTypes.showAllVideos,
+});
+export const showLikesVideos = () => ({
+  type: actionsTypes.showLikesVideos,
+});

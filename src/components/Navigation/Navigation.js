@@ -18,11 +18,12 @@ import {
   NavbarText,
   Container,
 } from "reactstrap";
-import { deleteAllVideos } from "../../actions";
+import { deleteAllVideos, showAllVideos, showLikesVideos } from "../../actions";
 import GetVideoForm from "../GetVideoForm/GetVideoForm";
 
 const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [likesVideos, setLikesVideos] = useState(false);
   const dispatch = useDispatch();
   const toggle = () => setIsOpen(!isOpen);
 
@@ -42,9 +43,28 @@ const Navigation = (props) => {
               </h3>
               <DropdownMenu right>
                 <DropdownItem>Option 1</DropdownItem>
-                {/* <DropdownItem onClick={()=>{dispatch()}} >Show likes videos</DropdownItem> */}
+                {likesVideos ? (
+                  <DropdownItem
+                    onClick={() => {
+                      dispatch(showLikesVideos());
+                      setLikesVideos(!likesVideos);
+                    }}
+                  >
+                    Show likes videos
+                  </DropdownItem>
+                ) : (
+                  <DropdownItem
+                    onClick={() => {
+                      dispatch(showAllVideos());
+                      setLikesVideos(!likesVideos);
+                    }}
+                  >
+                    show all videos
+                  </DropdownItem>
+                )}
+
                 <DropdownItem divider />
-                <DropdownItem onClick={dispatch(deleteAllVideos())}>
+                <DropdownItem onClick={() => dispatch(deleteAllVideos())}>
                   Delete all videos
                 </DropdownItem>
               </DropdownMenu>

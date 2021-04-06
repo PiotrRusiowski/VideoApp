@@ -48,6 +48,16 @@ const reducer = (state = initialState, actions) => {
         ...state,
         videosList: [],
       };
+    case actionsTypes.showLikesVideos:
+      return {
+        ...state,
+        showVideos: state.likesVideosList,
+      };
+    case actionsTypes.showAllVideos:
+      return {
+        ...state,
+        showVideos: state.videosList,
+      };
 
     default:
       return state;

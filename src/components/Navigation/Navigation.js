@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BsFilterLeft } from "react-icons/bs";
 
@@ -9,23 +9,26 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
   Container,
 } from "reactstrap";
-import { deleteAllVideos, showAllVideos, showLikesVideos } from "../../actions";
+import {
+  deleteAllVideos,
+  selectVideosListView,
+  showAllVideos,
+  showLikesVideos,
+} from "../../actions";
 import GetVideoForm from "../GetVideoForm/GetVideoForm";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [likesVideos, setLikesVideos] = useState(false);
   const dispatch = useDispatch();
   const toggle = () => setIsOpen(!isOpen);
+  const selectedIsList = useSelector(({ isList }) => isList);
 
   return (
     <Navbar color="light" light expand="md">
@@ -46,22 +49,27 @@ const Navigation = (props) => {
                 {likesVideos ? (
                   <DropdownItem
                     onClick={() => {
-                      dispatch(showLikesVideos());
-                      setLikesVideos(!likesVideos);
-                    }}
-                  >
-                    Show likes videos
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem
-                    onClick={() => {
                       dispatch(showAllVideos());
                       setLikesVideos(!likesVideos);
                     }}
                   >
                     show all videos
                   </DropdownItem>
+                ) : (
+                  <DropdownItem
+                    onClick={() => {
+                      dispatch(showLikesVideos());
+                      setLikesVideos(!likesVideos);
+                    }}
+                  >
+                    Show likes videos
+                  </DropdownItem>
                 )}
+
+                <DropdownItem onClick={() => dispatch(selectVideosListView())}>
+                  Slect view:
+                  {selectedIsList ? " tiles" : " list"}
+                </DropdownItem>
 
                 <DropdownItem divider />
                 <DropdownItem onClick={() => dispatch(deleteAllVideos())}>

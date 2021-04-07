@@ -1,26 +1,37 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToLikes, deleteSingleVideo } from "../../actions";
+import { useDispatch } from "react-redux";
+import "./VideoCard.css";
+import {
+  addToLikes,
+  deleteSingleVideo,
+  deleteSingleLikesVideo,
+  isHoverTrue,
+  isHoverFalse,
+} from "../../actions";
 import VideoModal from "../VideoModal/VideoModal";
-import { AiFillLike } from "react-icons/ai";
-
+import { AiFillLike, AiFillPlayCircle } from "react-icons/ai";
+import { TiDelete } from "react-icons/ti";
 import "./VideoCard";
 import {
   Card,
-  CardText,
   CardBody,
   CardTitle,
   CardSubtitle,
   CardImg,
   Button,
-  CardColumns,
-  CardDeck,
 } from "reactstrap";
 export const VideoCard = ({ video }) => {
-  const { title, thumbnail, publishedAt, likeCount, viewCount, id } = video;
+  const {
+    title,
+    thumbnail,
+    publishedAt,
+    likeCount,
+    viewCount,
+    id,
+    isHover,
+  } = video;
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
-
   const toggle = () => setModal(!modal);
 
   return (
@@ -28,28 +39,56 @@ export const VideoCard = ({ video }) => {
       <VideoModal modal={modal} toggle={toggle} video={video} />
 
       <Card
-        style={{ height: "400px", cursor: "pointer" }}
-        className="mb-4"
-        onClick={toggle}
+        className="mb-4 videoCard"
+        onMouseEnter={() => dispatch(isHoverTrue(id))}
+        onMouseLeave={() => {
+          dispatch(isHoverFalse());
+        }}
+        inverse
       >
         <CardImg
+          style={{ cursor: "pointer" }}
+          onClick={toggle}
           top
           width="100%"
           height="200px"
           src={thumbnail}
           alt="Card image cap"
         />
+        {isHover ? (
+          <div className="hoverVideoCard">
+            <div
+              className="deleteBtn"
+              onClick={() => {
+                dispatch(deleteSingleVideo(id));
+                dispatch(deleteSingleLikesVideo(id));
+              }}
+            >
+              <TiDelete />
+            </div>
+            <div className="playBtn">
+              <AiFillPlayCircle />
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
         <CardBody>
-          <CardTitle tag="h6">{title}</CardTitle>
+          <CardTitle color="white" tag="h6">
+            {title}
+          </CardTitle>
           <CardSubtitle className="mb-1 text-muted">{publishedAt}</CardSubtitle>
           <CardSubtitle className="mb-1 text-muted">
             {viewCount} views
           </CardSubtitle>
           <CardSubtitle className="mb-4 text-muted">
-            <AiFillLike /> {likeCount}
+            <AiFillLike
+              onClick={() => dispatch(addToLikes(id))}
+              className="addToLikeBtn"
+            />{" "}
+            {likeCount}
           </CardSubtitle>
-          <Button onClick={() => dispatch(deleteSingleVideo(id))}>X</Button>
-          <Button onClick={() => dispatch(addToLikes(id))}>Add</Button>
         </CardBody>
       </Card>
     </>

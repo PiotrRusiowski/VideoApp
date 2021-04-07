@@ -1,44 +1,52 @@
 import { actionsTypes } from "../actions/actionsTypes";
-// import { getVideosFromLocalStorage } from "../utils/localStorageGetter";
-
-const getVideosFromLocalStorage = () => {
-  let localStorageVideos;
-
-  if (localStorage.getItem("videosList")) {
-    localStorageVideos = JSON.parse(localStorage.getItem("videosList"));
-  } else {
-    localStorageVideos = [];
-  }
-
-  return localStorageVideos;
-};
+import {
+  getVideosFromLocalStorage,
+  getLikesVideosFromLocalStorage,
+} from "../utils/localStorageGetter";
 
 const initialState = {
   showVideos: [],
-  videosList: getVideosFromLocalStorage(),
-  likesVideosList: [],
+  allVideosList: getVideosFromLocalStorage(),
+  likesVideosList: getLikesVideosFromLocalStorage(),
+  isList: false,
 };
 const reducer = (state = initialState, actions) => {
   const { type, payload } = actions;
   switch (type) {
     case actionsTypes.GET_VIDEO:
-      return {
-        ...state,
-        videosList: [...state.videosList, payload],
-      };
+      let isVideoInList;
+
+      state.allVideosList.forEach((video) => {
+        if (video.id === payload.id) {
+          isVideoInList = true;
+        }
+      });
+
+      if (isVideoInList) {
+        return {
+          ...state,
+          allVideosList: [...state.allVideosList],
+        };
+      } else {
+        return {
+          ...state,
+          allVideosList: [...state.allVideosList, payload],
+        };
+      }
+
     case actionsTypes.deleteSingleVideo:
-      const videosListAfterDelete = state.videosList.filter(
+      const videosListAfterDelete = state.allVideosList.filter(
         (video) => video.id !== payload
       );
 
-      console.log(videosListAfterDelete);
       return {
         ...state,
-        videosList: [...videosListAfterDelete],
+        allVideosList: [...videosListAfterDelete],
       };
     case actionsTypes.addToLikes:
-      const likeVideo = state.videosList.find((video) => video.id === payload);
-      console.log(payload);
+      const likeVideo = state.allVideosList.find(
+        (video) => video.id === payload
+      );
       return {
         ...state,
         likesVideosList: [...state.likesVideosList, likeVideo],
@@ -46,7 +54,8 @@ const reducer = (state = initialState, actions) => {
     case actionsTypes.deleteAllVideos:
       return {
         ...state,
-        videosList: [],
+        allVideosList: [],
+        likesVideosList: [],
       };
     case actionsTypes.showLikesVideos:
       return {
@@ -56,7 +65,42 @@ const reducer = (state = initialState, actions) => {
     case actionsTypes.showAllVideos:
       return {
         ...state,
-        showVideos: state.videosList,
+        showVideos: state.allVideosList,
+      };
+    case actionsTypes.deleteSingleLikesVideo:
+      const likesVideosListAfterDelete = state.likesVideosList.filter(
+        (video) => video.id !== payload
+      );
+
+      return {
+        ...state,
+        likesVideosList: [...likesVideosListAfterDelete],
+      };
+    case actionsTypes.selectVideosListView:
+      return {
+        ...state,
+        isList: !state.isList,
+      };
+    case actionsTypes.IS_HOVER_TRUE:
+      const mapShowVideos = state.allVideosList.map((video) => {
+        if (payload === video.id) {
+          video.isHover = true;
+        }
+        return video;
+      });
+      return {
+        ...state,
+        showVideos: mapShowVideos,
+      };
+    case actionsTypes.IS_HOVER_FALSE:
+      const isHoverFalse = state.showVideos.map((video) => {
+        video.isHover = false;
+        return video;
+      });
+
+      return {
+        ...state,
+        showVideos: isHoverFalse,
       };
 
     default:

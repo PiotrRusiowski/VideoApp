@@ -2,20 +2,32 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { VideoCard } from "../VideoCard/VideoCard";
 import { Row, Col } from "reactstrap";
+import { Alert } from "reactstrap";
 
 const VideosList = () => {
   const selectedVideoList = useSelector(({ showVideos }) => showVideos);
+  const selectedIsList = useSelector(({ isList }) => isList);
 
   return (
-    <Row sm="4">
-      {selectedVideoList.map((video) => (
+    <>
+      {selectedIsList ? (
         <>
-          <Col>
-            <VideoCard key={video.id} video={video} />
-          </Col>
+          {selectedVideoList.map((video) => (
+            <Col key={video.id} sm="3">
+              <VideoCard video={video} />
+            </Col>
+          ))}
         </>
-      ))}
-    </Row>
+      ) : (
+        <Row>
+          {selectedVideoList.map((video) => (
+            <Col key={video.id} sm="3">
+              <VideoCard video={video} />
+            </Col>
+          ))}
+        </Row>
+      )}
+    </>
   );
 };
 

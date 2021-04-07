@@ -30,7 +30,9 @@ export const getVideoByYouTubeApi = (
         thumbnail,
         likeCount,
         viewCount,
+        isHover: false,
       };
+
       dispatch(getVideo(video));
     })
     .catch((err) => callbackErrorFunction(videoId, dispatch));
@@ -55,6 +57,7 @@ export const getVideoByVimeoApi = (videoId, dispatch) => {
         publishedAt: created_time,
         id: videoId,
         link,
+        isHover: false,
       };
       dispatch(getVideo(video));
     })

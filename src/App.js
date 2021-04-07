@@ -7,14 +7,29 @@ import Navigation from "./components/Navigation/Navigation";
 import { showAllVideos } from "./actions";
 
 const App = () => {
-  const selectedVideoList = useSelector(({ videosList }) => videosList);
+  const slelectedAllVideosList = useSelector(
+    ({ allVideosList }) => allVideosList
+  );
+  const slelectedLikesVideosList = useSelector(
+    ({ likesVideosList }) => likesVideosList
+  );
+  const selectedShowVideo = useSelector(({ showVideos }) => showVideos);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    localStorage.setItem("videosList", JSON.stringify(selectedVideoList));
-  }, [selectedVideoList]);
+    localStorage.setItem(
+      "allVideosList",
+      JSON.stringify(slelectedAllVideosList)
+    );
+    localStorage.setItem(
+      "likesVideosList",
+      JSON.stringify(slelectedLikesVideosList)
+    );
+  }, [slelectedAllVideosList, slelectedLikesVideosList]);
+
   useEffect(() => {
     dispatch(showAllVideos());
-  }, []);
+  }, [slelectedAllVideosList]);
 
   return (
     <div className="App">

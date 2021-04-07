@@ -20,3 +20,17 @@ export const showAllVideos = () => ({
 export const showLikesVideos = () => ({
   type: actionsTypes.showLikesVideos,
 });
+export const deleteSingleLikesVideo = (id) => ({
+  type: actionsTypes.deleteSingleLikesVideo,
+  payload: id,
+});
+export const selectVideosListView = () => ({
+  type: actionsTypes.selectVideosListView,
+});
+export const isHoverTrue = (id) => ({
+  type: actionsTypes.IS_HOVER_TRUE,
+  payload: id,
+});
+export const isHoverFalse = () => ({
+  type: actionsTypes.IS_HOVER_FALSE,
+});

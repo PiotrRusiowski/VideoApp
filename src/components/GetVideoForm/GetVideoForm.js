@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Container, Form, Input, Row } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideo } from "../../actions";
-import axios from "axios";
-import { youTubeKey, vimeoKey } from "../../apiKeys";
+
 import {
   getVideoByYouTubeApi,
   getVideoByVimeoApi,

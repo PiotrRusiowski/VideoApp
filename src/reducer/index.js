@@ -34,7 +34,7 @@ const reducer = (state = initialState, actions) => {
         };
       }
 
-    case actionsTypes.deleteSingleVideo:
+    case actionsTypes.DELETE_SINGLE_VIDEO:
       const videosListAfterDelete = state.allVideosList.filter(
         (video) => video.id !== payload
       );
@@ -43,7 +43,7 @@ const reducer = (state = initialState, actions) => {
         ...state,
         allVideosList: [...videosListAfterDelete],
       };
-    case actionsTypes.addToLikes:
+    case actionsTypes.ADD_TO_LIKES:
       const likeVideo = state.allVideosList.find(
         (video) => video.id === payload
       );
@@ -51,23 +51,23 @@ const reducer = (state = initialState, actions) => {
         ...state,
         likesVideosList: [...state.likesVideosList, likeVideo],
       };
-    case actionsTypes.deleteAllVideos:
+    case actionsTypes.DELETE_ALL_VIDEOS:
       return {
         ...state,
         allVideosList: [],
         likesVideosList: [],
       };
-    case actionsTypes.showLikesVideos:
+    case actionsTypes.SHOW_LIKES_VIDEOS:
       return {
         ...state,
         showVideos: state.likesVideosList,
       };
-    case actionsTypes.showAllVideos:
+    case actionsTypes.SHOW_ALL_VIDEOS:
       return {
         ...state,
         showVideos: state.allVideosList,
       };
-    case actionsTypes.deleteSingleLikesVideo:
+    case actionsTypes.DELETE_SINGLE_LIKES_VIDEO:
       const likesVideosListAfterDelete = state.likesVideosList.filter(
         (video) => video.id !== payload
       );
@@ -76,13 +76,13 @@ const reducer = (state = initialState, actions) => {
         ...state,
         likesVideosList: [...likesVideosListAfterDelete],
       };
-    case actionsTypes.selectVideosListView:
+    case actionsTypes.SELECT_VIDEOS_LIST_VIEW:
       return {
         ...state,
         isList: !state.isList,
       };
     case actionsTypes.IS_HOVER_TRUE:
-      const mapShowVideos = state.allVideosList.map((video) => {
+      const mapShowVideos = state.showVideos.map((video) => {
         if (payload === video.id) {
           video.isHover = true;
         }

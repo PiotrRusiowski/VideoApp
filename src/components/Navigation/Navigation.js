@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import "./Navigation.css";
 import { BsFilterLeft } from "react-icons/bs";
+import { BiPlayCircle } from "react-icons/bi";
 
 import {
   Collapse,
@@ -31,9 +32,14 @@ const Navigation = () => {
   const selectedIsList = useSelector(({ isList }) => isList);
 
   return (
-    <Navbar color="light" light expand="md">
+    <Navbar dark expand="md" style={{ padding: "20px" }}>
       <Container>
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <NavbarBrand className="text-danger navLogoWrapper" href="/">
+          <div className="navLogo">
+            <BiPlayCircle />
+          </div>
+          VGetter
+        </NavbarBrand>
         <GetVideoForm />
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

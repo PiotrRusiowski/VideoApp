@@ -82,11 +82,12 @@ export const VideoCard = ({ video }) => {
           <CardSubtitle className="mb-1 text-muted">
             {viewCount} views
           </CardSubtitle>
-          <CardSubtitle className="mb-4 text-muted">
+          <CardSubtitle className="mb-4 text-muted likesCounter">
             <AiFillLike
+              style={isHover ? { color: "white" } : ""}
               onClick={() => dispatch(addToLikes(id))}
               className="addToLikeBtn"
-            />{" "}
+            />
             {likeCount}
           </CardSubtitle>
         </CardBody>

@@ -1,6 +1,6 @@
 import { actionsTypes } from "./actionsTypes";
 export const deleteSingleVideo = (id) => ({
-  type: actionsTypes.deleteSingleVideo,
+  type: actionsTypes.DELETE_SINGLE_VIDEO,
   payload: id,
 });
 export const getVideo = (video) => ({
@@ -8,24 +8,24 @@ export const getVideo = (video) => ({
   payload: video,
 });
 export const addToLikes = (id) => ({
-  type: actionsTypes.addToLikes,
+  type: actionsTypes.ADD_TO_LIKES,
   payload: id,
 });
 export const deleteAllVideos = () => ({
-  type: actionsTypes.deleteAllVideos,
+  type: actionsTypes.DELETE_ALL_VIDEOS,
 });
 export const showAllVideos = () => ({
-  type: actionsTypes.showAllVideos,
+  type: actionsTypes.SHOW_ALL_VIDEOS,
 });
 export const showLikesVideos = () => ({
-  type: actionsTypes.showLikesVideos,
+  type: actionsTypes.SHOW_LIKES_VIDEOS,
 });
 export const deleteSingleLikesVideo = (id) => ({
-  type: actionsTypes.deleteSingleLikesVideo,
+  type: actionsTypes.DELETE_SINGLE_LIKES_VIDEO,
   payload: id,
 });
 export const selectVideosListView = () => ({
-  type: actionsTypes.selectVideosListView,
+  type: actionsTypes.SELECT_VIDEOS_LIST_VIEW,
 });
 export const isHoverTrue = (id) => ({
   type: actionsTypes.IS_HOVER_TRUE,

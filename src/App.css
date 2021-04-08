@@ -25,4 +25,7 @@ a{
 }
 .App{
   background-color: RGB(27, 27, 27);
+  min-height: 100vh;
+
 }
+

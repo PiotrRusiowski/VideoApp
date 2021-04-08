@@ -1,0 +1,10 @@
+.navLogoWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navLogo{
+    font-size: 30px;
+    margin-bottom: 5px;
+    margin-right: 2px;
+}

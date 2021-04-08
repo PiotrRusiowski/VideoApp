@@ -22,5 +22,15 @@
     cursor:pointer;
     font-size: 20px;
 }
-.videoCard{height: 350px;
-    background:#1b1b1b!important}
+.addToLikeBtn:hover{
+    color:white
+}
+
+.videoCard{height: 380px;
+    background:#1b1b1b!important;
+
+}
+.likesCounter{
+    display: flex;
+    align-items: center;
+}

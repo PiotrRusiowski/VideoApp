@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Container, Form, Input, Row } from "reactstrap";
+import {
+  Button,
+  Container,
+  Form,
+  Input,
+  Row,
+  InputGroupAddon,
+  InputGroup,
+} from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -32,10 +40,17 @@ const GetVideoForm = () => {
   };
   return (
     <Form style={{ width: "60%", display: "flex" }} onSubmit={getVideoDetails}>
-      <Input name="searchVideo" style={{ width: "85%" }} />
-      <Button color="danger" size="sm" type="submit">
-        get video
-      </Button>
+      <InputGroup>
+        <Input
+          name="searchVideo"
+          placeholder="Pase vimeo or youtube link, id . . . "
+        />
+        <InputGroupAddon addonType="append">
+          <Button color="dark" size="sm" type="submit">
+            get video{" "}
+          </Button>
+        </InputGroupAddon>
+      </InputGroup>
     </Form>
   );
 };

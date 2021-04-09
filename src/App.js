@@ -5,7 +5,6 @@ import { Container } from "reactstrap";
 import VideosList from "./components/VideosList/VideosList";
 import Navigation from "./components/Navigation/Navigation";
 import { showAllVideos } from "./actions";
-import VideosPagination from "./components/VideosPagination/VideosPagination";
 
 const App = () => {
   const slelectedAllVideosList = useSelector(
@@ -36,7 +35,6 @@ const App = () => {
       <Navigation />
       <Container>
         <VideosList />
-        <VideosPagination />
       </Container>
     </div>
   );

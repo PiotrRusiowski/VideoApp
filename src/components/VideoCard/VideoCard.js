@@ -13,6 +13,7 @@ import { AiFillLike, TiDeleteOutline, BiPlayCircle } from "react-icons/all";
 
 import "./VideoCard";
 import { Card, CardBody, CardTitle, CardSubtitle, CardImg } from "reactstrap";
+import { dateFormater } from "../../utils/dateFormater";
 export const VideoCard = ({ video }) => {
   const {
     title,
@@ -80,7 +81,9 @@ export const VideoCard = ({ video }) => {
           <CardTitle color="white" tag="h6">
             {title}
           </CardTitle>
-          <CardSubtitle className="mb-1 text-muted">{publishedAt}</CardSubtitle>
+          <CardSubtitle className="mb-1 text-muted">
+            {dateFormater(publishedAt)}
+          </CardSubtitle>
           <CardSubtitle className="mb-1 text-muted">
             {viewCount} views
           </CardSubtitle>

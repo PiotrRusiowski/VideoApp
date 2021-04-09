@@ -34,3 +34,8 @@ export const isHoverTrue = (id) => ({
 export const isHoverFalse = () => ({
   type: actionsTypes.IS_HOVER_FALSE,
 });
+
+export const sortVideos = (sortingType) => ({
+  type: actionsTypes.SORT_VIDEOS,
+  payload: sortingType,
+});

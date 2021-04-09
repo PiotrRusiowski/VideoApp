@@ -1,4 +1,5 @@
 import { actionsTypes } from "../actions/actionsTypes";
+import { sortTypes } from "../data/sortTypes";
 import {
   getVideosFromLocalStorage,
   getLikesVideosFromLocalStorage,
@@ -101,6 +102,33 @@ const reducer = (state = initialState, actions) => {
       return {
         ...state,
         showVideos: isHoverFalse,
+      };
+
+    case actionsTypes.SORT_VIDEOS:
+      let sortedVideos;
+
+      switch (payload) {
+        case sortTypes.descending:
+          sortedVideos = state.allVideosList.sort(
+            (videoOne, videoTwo) => videoTwo.publishedAt - videoOne.publishedAt
+          );
+
+          break;
+
+        case sortTypes.ascending:
+          sortedVideos = state.allVideosList.sort(
+            (videoOne, videoTwo) => videoOne.publishedAt - videoTwo.publishedAt
+          );
+
+          break;
+
+        default:
+          sortedVideos = state.allVideosList;
+      }
+
+      return {
+        ...state,
+        showVideos: [...sortedVideos],
       };
 
     default:

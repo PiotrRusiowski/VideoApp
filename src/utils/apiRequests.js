@@ -22,11 +22,14 @@ export const getVideoByYouTubeApi = (
       const id = data.items[0].id;
       const thumbnail = thumbnails.standard.url;
       const link = `https://www.youtube.com/watch?v=${id}`;
+
+      const publishedAtDate = new Date(publishedAt);
+
       const video = {
         id,
         link,
         title,
-        publishedAt,
+        publishedAt: publishedAtDate,
         thumbnail,
         likeCount,
         viewCount,
@@ -49,12 +52,13 @@ export const getVideoByVimeoApi = (videoId, dispatch) => {
       const { name, metadata, pictures, created_time, link } = res.data;
       const likeCount = metadata.connections.likes.total;
       const thumbnail = pictures.sizes[3].link;
+      const publishedAtDate = new Date(created_time);
 
       const video = {
         title: name,
         likeCount,
         thumbnail,
-        publishedAt: created_time,
+        publishedAt: publishedAtDate,
         id: videoId,
         link,
         isHover: false,

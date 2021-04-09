@@ -12,9 +12,7 @@ import {
 } from "react-icons/all";
 
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   UncontrolledDropdown,
@@ -28,8 +26,10 @@ import {
   selectVideosListView,
   showAllVideos,
   showLikesVideos,
+  sortVideos,
 } from "../../actions";
 import GetVideoForm from "../GetVideoForm/GetVideoForm";
+import { sortTypes } from "../../data/sortTypes";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +58,20 @@ const Navigation = () => {
               </DropdownToggle>
             </h3>
             <DropdownMenu right>
-              <DropdownItem>Option 1</DropdownItem>
+              <DropdownItem
+                onClick={() => dispatch(sortVideos(sortTypes.descending))}
+              >
+                Sort descending
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => dispatch(sortVideos(sortTypes.ascending))}
+              >
+                Sort ascending
+              </DropdownItem>
+
+              <DropdownItem onClick={() => dispatch(showAllVideos())}>
+                Stop sorting
+              </DropdownItem>
               {likesVideos ? (
                 <DropdownItem
                   onClick={() => {

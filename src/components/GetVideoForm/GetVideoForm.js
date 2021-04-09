@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Button,
-  Container,
-  Form,
-  Input,
-  Row,
-  InputGroupAddon,
-  InputGroup,
-} from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Input, InputGroupAddon, InputGroup } from "reactstrap";
+import { useDispatch } from "react-redux";
+import "./GetVideoForm.css";
 
 import {
   getVideoByYouTubeApi,
@@ -39,7 +32,7 @@ const GetVideoForm = () => {
     e.target.reset();
   };
   return (
-    <Form style={{ width: "60%", display: "flex" }} onSubmit={getVideoDetails}>
+    <Form className="getVideoForm" onSubmit={getVideoDetails}>
       <InputGroup>
         <Input
           name="searchVideo"

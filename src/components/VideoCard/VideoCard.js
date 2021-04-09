@@ -9,19 +9,10 @@ import {
   isHoverFalse,
 } from "../../actions";
 import VideoModal from "../VideoModal/VideoModal";
-import { AiFillLike, AiFillPlayCircle } from "react-icons/ai";
-import { TiDelete, TiDeleteOutline } from "react-icons/ti";
-import { BiPlayCircle } from "react-icons/bi";
+import { AiFillLike, TiDeleteOutline, BiPlayCircle } from "react-icons/all";
 
 import "./VideoCard";
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardImg,
-  Button,
-} from "reactstrap";
+import { Card, CardBody, CardTitle, CardSubtitle, CardImg } from "reactstrap";
 export const VideoCard = ({ video }) => {
   const {
     title,
@@ -57,6 +48,15 @@ export const VideoCard = ({ video }) => {
           src={thumbnail}
           alt="Card image cap"
         />
+        <div
+          className="deleteBtn mobile"
+          onClick={() => {
+            dispatch(deleteSingleVideo(id));
+            dispatch(deleteSingleLikesVideo(id));
+          }}
+        >
+          <TiDeleteOutline />
+        </div>
         {isHover ? (
           <div className="hoverVideoCard">
             <div

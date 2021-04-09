@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React from "react";
+import { Modal, ModalHeader, ModalFooter } from "reactstrap";
 import ReactPlayer from "react-player";
 
 const VideoModal = ({ modal, toggle, video }) => {

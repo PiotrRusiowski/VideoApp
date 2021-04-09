@@ -1,13 +1,17 @@
 
-
-
-
-
 .navLogo{
     font-size: 25px;
    margin-bottom: 4px;
     margin-right: 2px;
 }
-.ff{
-    display: flex;
+
+.optionIcon{
+    margin-bottom: 4px;
+}
+.logoWrapper{
+    display: block;
+}
+@media(max-width:425px){
+    .logoWrapper
+  {  display: none;}
 }

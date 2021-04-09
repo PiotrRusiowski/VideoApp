@@ -1,0 +1,9 @@
+.getVideoForm{
+    display: flex;
+    width:70%;
+}
+@media(max-width:425px){
+    .getVideoForm{
+        width:100%;
+    }
+}

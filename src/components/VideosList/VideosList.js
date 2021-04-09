@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { VideoCard } from "../VideoCard/VideoCard";
 import { Row, Col } from "reactstrap";
-import { Alert } from "reactstrap";
 
 const VideosList = () => {
   const selectedVideoList = useSelector(({ showVideos }) => showVideos);

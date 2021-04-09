@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Navigation.css";
-import { BsFilterLeft } from "react-icons/bs";
-import { BiPlayCircle } from "react-icons/bi";
+
 import {
-  AiOutlineInsertRowAbove,
-  BsList,
+  RiFileList2Fill,
   AiFillLike,
   MdDelete,
   MdVideoLibrary,
+  BsFilterLeft,
+  BiPlayCircle,
 } from "react-icons/all";
 
 import {
@@ -41,63 +41,56 @@ const Navigation = () => {
   return (
     <Navbar dark expand="md" style={{ paddng: "20px" }}>
       <Container>
-        <NavbarBrand className="text-success logoWrapper" href="/">
-          <BiPlayCircle className="navLogo" />
-          VGetter
-        </NavbarBrand>
+        <div className="logoWrapper">
+          <NavbarBrand className="text-success" href="/">
+            <BiPlayCircle className="navLogo" />
+            VGetter
+          </NavbarBrand>
+        </div>
 
         <GetVideoForm />
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="" navbar>
-            <UncontrolledDropdown nav inNavbar>
-              <h3>
-                <DropdownToggle nav caret>
-                  <BsFilterLeft />
-                </DropdownToggle>
-              </h3>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                {likesVideos ? (
-                  <DropdownItem
-                    onClick={() => {
-                      dispatch(showAllVideos());
-                      setLikesVideos(!likesVideos);
-                    }}
-                  >
-                    <MdVideoLibrary /> All videos
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem
-                    onClick={() => {
-                      dispatch(showLikesVideos());
-                      setLikesVideos(!likesVideos);
-                    }}
-                  >
-                    <AiFillLike /> Likes videos
-                  </DropdownItem>
-                )}
 
-                <DropdownItem onClick={() => dispatch(selectVideosListView())}>
-                  {selectedIsList ? (
-                    <>
-                      <AiOutlineInsertRowAbove /> View: tiles
-                    </>
-                  ) : (
-                    <>
-                      <BsList /> View: list
-                    </>
-                  )}
+        <Nav className="mr-auto" navbar>
+          <UncontrolledDropdown>
+            <h3>
+              <DropdownToggle nav caret>
+                <BsFilterLeft />
+              </DropdownToggle>
+            </h3>
+            <DropdownMenu right>
+              <DropdownItem>Option 1</DropdownItem>
+              {likesVideos ? (
+                <DropdownItem
+                  onClick={() => {
+                    dispatch(showAllVideos());
+                    setLikesVideos(!likesVideos);
+                  }}
+                >
+                  <MdVideoLibrary className="optionIcon" /> All videos
                 </DropdownItem>
+              ) : (
+                <DropdownItem
+                  onClick={() => {
+                    dispatch(showLikesVideos());
+                    setLikesVideos(!likesVideos);
+                  }}
+                >
+                  <AiFillLike className="optionIcon" /> Likes videos
+                </DropdownItem>
+              )}
 
-                <DropdownItem divider />
-                <DropdownItem onClick={() => dispatch(deleteAllVideos())}>
-                  <MdDelete /> Delete all
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-        </Collapse>
+              <DropdownItem onClick={() => dispatch(selectVideosListView())}>
+                <RiFileList2Fill className="optionIcon" />
+                {selectedIsList ? " View: tiles" : " View: list"}
+              </DropdownItem>
+
+              <DropdownItem divider />
+              <DropdownItem onClick={() => dispatch(deleteAllVideos())}>
+                <MdDelete className="optionIcon" /> Delete all
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        </Nav>
       </Container>
     </Navbar>
   );

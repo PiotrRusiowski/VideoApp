@@ -14,7 +14,6 @@ const App = () => {
   const slelectedLikesVideosList = useSelector(
     ({ likesVideosList }) => likesVideosList
   );
-  const selectedShowVideo = useSelector(({ showVideos }) => showVideos);
   const dispatch = useDispatch();
 
   useEffect(() => {

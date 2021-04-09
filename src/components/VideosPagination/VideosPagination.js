@@ -3,7 +3,7 @@ import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 const VideosPagination = () => {
   return (
-    <Pagination aria-label="Page navigation example">
+    <Pagination aria-label="Page navigation example " className="text-success">
       <PaginationItem>
         <PaginationLink first href="#" />
       </PaginationItem>

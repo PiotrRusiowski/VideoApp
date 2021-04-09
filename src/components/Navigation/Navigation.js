@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Navigation.css";
 import { BsFilterLeft } from "react-icons/bs";
 import { BiPlayCircle } from "react-icons/bi";
+import {
+  AiOutlineInsertRowAbove,
+  BsList,
+  AiFillLike,
+  MdDelete,
+  MdVideoLibrary,
+} from "react-icons/all";
 
 import {
   Collapse,
@@ -32,14 +39,13 @@ const Navigation = () => {
   const selectedIsList = useSelector(({ isList }) => isList);
 
   return (
-    <Navbar dark expand="md" style={{ padding: "20px" }}>
+    <Navbar dark expand="md" style={{ paddng: "20px" }}>
       <Container>
-        <NavbarBrand className="text-danger navLogoWrapper" href="/">
-          <div className="navLogo">
-            <BiPlayCircle />
-          </div>
+        <NavbarBrand className="text-success logoWrapper" href="/">
+          <BiPlayCircle className="navLogo" />
           VGetter
         </NavbarBrand>
+
         <GetVideoForm />
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -59,7 +65,7 @@ const Navigation = () => {
                       setLikesVideos(!likesVideos);
                     }}
                   >
-                    show all videos
+                    <MdVideoLibrary /> All videos
                   </DropdownItem>
                 ) : (
                   <DropdownItem
@@ -68,18 +74,25 @@ const Navigation = () => {
                       setLikesVideos(!likesVideos);
                     }}
                   >
-                    Show likes videos
+                    <AiFillLike /> Likes videos
                   </DropdownItem>
                 )}
 
                 <DropdownItem onClick={() => dispatch(selectVideosListView())}>
-                  Slect view:
-                  {selectedIsList ? " tiles" : " list"}
+                  {selectedIsList ? (
+                    <>
+                      <AiOutlineInsertRowAbove /> View: tiles
+                    </>
+                  ) : (
+                    <>
+                      <BsList /> View: list
+                    </>
+                  )}
                 </DropdownItem>
 
                 <DropdownItem divider />
                 <DropdownItem onClick={() => dispatch(deleteAllVideos())}>
-                  Delete all videos
+                  <MdDelete /> Delete all
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

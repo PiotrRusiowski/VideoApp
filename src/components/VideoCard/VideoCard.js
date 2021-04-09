@@ -10,7 +10,9 @@ import {
 } from "../../actions";
 import VideoModal from "../VideoModal/VideoModal";
 import { AiFillLike, AiFillPlayCircle } from "react-icons/ai";
-import { TiDelete } from "react-icons/ti";
+import { TiDelete, TiDeleteOutline } from "react-icons/ti";
+import { BiPlayCircle } from "react-icons/bi";
+
 import "./VideoCard";
 import {
   Card,
@@ -64,10 +66,10 @@ export const VideoCard = ({ video }) => {
                 dispatch(deleteSingleLikesVideo(id));
               }}
             >
-              <TiDelete />
+              <TiDeleteOutline />
             </div>
             <div className="playBtn">
-              <AiFillPlayCircle />
+              <BiPlayCircle />
             </div>
           </div>
         ) : (

@@ -47,7 +47,7 @@ const GetVideoForm = () => {
         />
         <InputGroupAddon addonType="append">
           <Button color="dark" size="sm" type="submit">
-            get video{" "}
+            get video
           </Button>
         </InputGroupAddon>
       </InputGroup>

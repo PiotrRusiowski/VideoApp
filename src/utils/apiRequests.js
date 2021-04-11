@@ -23,7 +23,7 @@ export const getVideoByYouTubeApi = (
       const thumbnail = thumbnails.standard.url;
       const link = `https://www.youtube.com/watch?v=${id}`;
 
-      const publishedAtDate = new Date(publishedAt);
+      const publishedAtDate = new Date(publishedAt).getTime();
 
       const video = {
         id,
@@ -34,6 +34,7 @@ export const getVideoByYouTubeApi = (
         likeCount,
         viewCount,
         isHover: false,
+        addedAt: new Date().getTime(),
       };
 
       dispatch(getVideo(video));

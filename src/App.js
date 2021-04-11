@@ -4,7 +4,8 @@ import "./App.css";
 import { Container } from "reactstrap";
 import VideosList from "./components/VideosList/VideosList";
 import Navigation from "./components/Navigation/Navigation";
-import { showAllVideos } from "./actions";
+import { showAllVideos, sortVideos } from "./actions";
+import { sortTypes } from "./data/sortTypes";
 
 const App = () => {
   const slelectedAllVideosList = useSelector(
@@ -28,6 +29,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(showAllVideos());
+    dispatch(sortVideos(sortTypes.descending));
   }, [slelectedAllVideosList]);
 
   return (

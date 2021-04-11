@@ -22,7 +22,12 @@ const GetVideoForm = () => {
 
       getVideoByVimeoApi(videoId, dispatch);
     } else if (inputValue.includes("youtube")) {
-      videoId = inputValue.slice(inputValue.length - 11);
+      const queryString = inputValue.substr(
+        inputValue.indexOf("?"),
+        inputValue.length - inputValue.indexOf("?")
+      );
+      const queryParams = new URLSearchParams(queryString);
+      videoId = queryParams.get("v");
 
       getVideoByYouTubeApi(videoId, dispatch);
     } else {

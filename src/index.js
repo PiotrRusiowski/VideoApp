@@ -6,11 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import store from "./store";
 import { Provider } from "react-redux";
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+const options = {
+  position: positions.TOP_CENTER,
+  timeout: 4000,
+  offset: "30px",
+
+  transition: transitions.SCALE,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AlertProvider template={AlertTemplate} {...options}>
+        <App />
+      </AlertProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

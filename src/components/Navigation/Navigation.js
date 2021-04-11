@@ -9,6 +9,8 @@ import {
   MdVideoLibrary,
   BsFilterLeft,
   BiPlayCircle,
+  TiArrowSortedUp,
+  TiArrowSortedDown,
 } from "react-icons/all";
 
 import {
@@ -32,17 +34,17 @@ import GetVideoForm from "../GetVideoForm/GetVideoForm";
 import { sortTypes } from "../../data/sortTypes";
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [likesVideos, setLikesVideos] = useState(false);
+  const [sortDescending, setSortDescending] = useState(false);
   const dispatch = useDispatch();
-  const toggle = () => setIsOpen(!isOpen);
+
   const selectedIsList = useSelector(({ isList }) => isList);
 
   return (
-    <Navbar dark expand="md" style={{ paddng: "20px" }}>
+    <Navbar dark expand="md" className="videoNavbar">
       <Container>
         <div className="logoWrapper">
-          <NavbarBrand className="text-success" href="/">
+          <NavbarBrand className="text-info" href="/">
             <BiPlayCircle className="navLogo" />
             VGetter
           </NavbarBrand>
@@ -58,20 +60,6 @@ const Navigation = () => {
               </DropdownToggle>
             </h3>
             <DropdownMenu right>
-              <DropdownItem
-                onClick={() => dispatch(sortVideos(sortTypes.descending))}
-              >
-                Sort descending
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => dispatch(sortVideos(sortTypes.ascending))}
-              >
-                Sort ascending
-              </DropdownItem>
-
-              <DropdownItem onClick={() => dispatch(showAllVideos())}>
-                Stop sorting
-              </DropdownItem>
               {likesVideos ? (
                 <DropdownItem
                   onClick={() => {
@@ -94,8 +82,30 @@ const Navigation = () => {
 
               <DropdownItem onClick={() => dispatch(selectVideosListView())}>
                 <RiFileList2Fill className="optionIcon" />
-                {selectedIsList ? " View: tiles" : " View: list"}
+                {selectedIsList ? " View tiles" : " View list"}
               </DropdownItem>
+
+              {sortDescending ? (
+                <DropdownItem
+                  onClick={() => {
+                    dispatch(sortVideos(sortTypes.descending));
+                    setSortDescending(!sortDescending);
+                  }}
+                >
+                  <TiArrowSortedDown className="sortIcon" />
+                  Sort descending
+                </DropdownItem>
+              ) : (
+                <DropdownItem
+                  onClick={() => {
+                    dispatch(sortVideos(sortTypes.ascending));
+                    setSortDescending(!sortDescending);
+                  }}
+                >
+                  <TiArrowSortedUp className="sortIcon" />
+                  Sort ascending
+                </DropdownItem>
+              )}
 
               <DropdownItem divider />
               <DropdownItem onClick={() => dispatch(deleteAllVideos())}>

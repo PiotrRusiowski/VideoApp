@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div className="App">
       <Navigation />
-      <Container>
+      <Container fluid={true} fluid="sm">
         <VideosList />
       </Container>
     </div>

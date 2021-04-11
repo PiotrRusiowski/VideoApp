@@ -20,7 +20,7 @@ const VideosList = () => {
   const currentPageData = selectedVideoList
     .slice(offset, offset + perPage)
     .map((video) => (
-      <Col key={video.id} sm="3">
+      <Col key={video.id} sm="1" md="4" lg="3">
         <VideoCard video={video} />
       </Col>
     ));
@@ -29,19 +29,30 @@ const VideosList = () => {
 
   return (
     <>
-      {selectedIsList ? <>{currentPageData}</> : <Row>{currentPageData}</Row>}
-
-      <ReactPaginate
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        previousLinkClassName={"pagination__link"}
-        nextLinkClassName={"pagination__link"}
-        disabledClassName={"pagination__link--disabled"}
-        activeClassName={"pagination__link--active"}
-      />
+      {selectedVideoList.length ? (
+        <>
+          {selectedIsList ? (
+            <>{currentPageData}</>
+          ) : (
+            <Row>{currentPageData}</Row>
+          )}
+          <div className="paginate">
+            <ReactPaginate
+              previousLabel={"← Previous"}
+              nextLabel={"Next →"}
+              pageCount={pageCount}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination__link"}
+              nextLinkClassName={"pagination__link"}
+              disabledClassName={"pagination__link--disabled"}
+              activeClassName={"pagination__link--active"}
+            />
+          </div>
+        </>
+      ) : (
+        <h3>You don't have any videos yet</h3>
+      )}
     </>
   );
 };

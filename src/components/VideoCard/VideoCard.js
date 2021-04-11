@@ -10,10 +10,10 @@ import {
 } from "../../actions";
 import VideoModal from "../VideoModal/VideoModal";
 import { AiFillLike, TiDeleteOutline, BiPlayCircle } from "react-icons/all";
-
 import "./VideoCard";
 import { Card, CardBody, CardTitle, CardSubtitle, CardImg } from "reactstrap";
 import { dateFormater } from "../../utils/dateFormater";
+import { useAlert } from "react-alert";
 export const VideoCard = ({ video }) => {
   const {
     title,
@@ -27,7 +27,7 @@ export const VideoCard = ({ video }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-
+  const alert = useAlert();
   return (
     <>
       <VideoModal modal={modal} toggle={toggle} video={video} />
@@ -70,7 +70,7 @@ export const VideoCard = ({ video }) => {
               <TiDeleteOutline />
             </div>
             <div className="playBtn">
-              <BiPlayCircle />
+              <BiPlayCircle onClick={toggle} />
             </div>
           </div>
         ) : (
@@ -90,7 +90,10 @@ export const VideoCard = ({ video }) => {
           <CardSubtitle className="mb-4 text-muted likesCounter">
             <AiFillLike
               style={isHover ? { color: "white" } : ""}
-              onClick={() => dispatch(addToLikes(id))}
+              onClick={() => {
+                dispatch(addToLikes(id));
+                alert.show("Add to the likes list");
+              }}
               className="addToLikeBtn"
             />
             {likeCount}

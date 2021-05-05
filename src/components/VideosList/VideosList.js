@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { VideoCard } from "../VideoCard/VideoCard";
+import VideoCard from "../VideoCard/VideoCard";
 import { Row, Col } from "reactstrap";
 import ReactPaginate from "react-paginate";
 

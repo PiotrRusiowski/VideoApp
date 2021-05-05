@@ -8,22 +8,16 @@ import {
   isHoverTrue,
   isHoverFalse,
 } from "../../actions";
+import withHoverEffect from "../../hoc/withHoverEffect";
 import VideoModal from "../VideoModal/VideoModal";
 import { AiFillLike, TiDeleteOutline, BiPlayCircle } from "react-icons/all";
 import "./VideoCard";
 import { Card, CardBody, CardTitle, CardSubtitle, CardImg } from "reactstrap";
 import { dateFormater } from "../../utils/dateFormater";
 import { useAlert } from "react-alert";
-export const VideoCard = ({ video }) => {
-  const {
-    title,
-    thumbnail,
-    publishedAt,
-    likeCount,
-    viewCount,
-    id,
-    isHover,
-  } = video;
+const VideoCard = ({ video, isHover, toggleIsHover }) => {
+  const { title, thumbnail, publishedAt, likeCount, viewCount, id } = video;
+
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -34,10 +28,8 @@ export const VideoCard = ({ video }) => {
 
       <Card
         className="mb-4 videoCard"
-        onMouseEnter={() => dispatch(isHoverTrue(id))}
-        onMouseLeave={() => {
-          dispatch(isHoverFalse());
-        }}
+        onMouseEnter={toggleIsHover}
+        onMouseLeave={toggleIsHover}
         inverse
       >
         <CardImg
@@ -103,3 +95,4 @@ export const VideoCard = ({ video }) => {
     </>
   );
 };
+export default withHoverEffect(VideoCard);

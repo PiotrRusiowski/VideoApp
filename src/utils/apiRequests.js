@@ -34,7 +34,6 @@ export const getVideoByYouTubeApi = (
         likeCount,
         viewCount,
         isHover: false,
-        addedAt: new Date().getTime(),
       };
 
       dispatch(getVideo(video));

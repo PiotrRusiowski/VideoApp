@@ -33,6 +33,8 @@ After that please insert in your terminal:
 npm start
 
 Browser will automatically open on localhost:3000
+## live:
+https://video-getter.netlify.app
 
 If you have any problems feel free to contact me by e-mail:
 piorus9196@gmail.com

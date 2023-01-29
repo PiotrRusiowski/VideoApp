@@ -34,7 +34,7 @@ npm start
 
 Browser will automatically open on localhost:3000
 ## live:
-https://video-getter.netlify.app
+https://ornate-bombolone-f8e5f5.netlify.app
 
 If you have any problems feel free to contact me by e-mail:
 piorus9196@gmail.com
